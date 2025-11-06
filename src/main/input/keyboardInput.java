@@ -3,10 +3,10 @@ package main.input;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-public class keyboardInput implements KeyListener {
+public class KeyboardInput implements KeyListener {
      private InputManager input;
     // hàm gọi ngược 
-    public keyboardInput(){
+    public KeyboardInput(){
         input = new InputManager();
     }
     public void keyTyped(KeyEvent e){

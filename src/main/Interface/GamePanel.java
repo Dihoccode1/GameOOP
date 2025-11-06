@@ -1,19 +1,19 @@
 package main.Interface;
 
-import main.input.keyboardInput;
+import main.input.KeyboardInput;
 
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 
 public class GamePanel extends JPanel implements Runnable {
-    private keyboardInput keyboard;
+    private KeyboardInput keyboard;
     private Thread thread;
     private boolean isRunning = false;
 
 
     public GamePanel() {
-        keyboard = new keyboardInput();
+        keyboard = new KeyboardInput();
         this.addKeyListener(keyboard);
         this.setFocusable(true);
 }

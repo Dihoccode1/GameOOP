@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 
-public class frameImage {
+public class FrameImage {
     private String name;
     private BufferedImage image;
     
@@ -27,12 +27,12 @@ public class frameImage {
         this.image = image;
     }
 
-    public frameImage(String name , BufferedImage image){
+    public FrameImage(String name , BufferedImage image){
             setImage(image);
             setName(name);
     }
 
-    public frameImage(frameImage frameImages){
+    public FrameImage(FrameImage frameImages){
         image= new BufferedImage(frameImages.getImageWidth(),frameImages.getImageHeight(),frameImages.getImage().getType());
 
         Graphics g = image.getGraphics();
