@@ -31,7 +31,7 @@ public class FrameImage {
             setImage(image);
             setName(name);
     }
-
+// hàm sao chép khởi tạo
     public FrameImage(FrameImage frameImages){
         image= new BufferedImage(frameImages.getImageWidth(),frameImages.getImageHeight(),frameImages.getImage().getType());
 
