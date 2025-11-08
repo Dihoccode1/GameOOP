@@ -1,7 +1,7 @@
 package main.userinterface;
 
 import main.state.GameWorldState;
-import main.state.MenuState;
+// XÓA: import main.state.MenuState; 
 import main.state.State;
 
 
@@ -24,8 +24,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
     public GamePanel(){
 
-        //gameState = new MenuState(this);
-        gameState = new GameWorldState(this);
+        // Chỉ giữ lại khởi tạo GameWorldState.
+        // Dòng này đã đúng theo yêu cầu tối giản (bỏ qua MenuState):
+        gameState = new GameWorldState(this); 
         
         inputManager = new InputManager(gameState);
 
@@ -35,7 +36,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         gameThread = new Thread(this);
         gameThread.start();
     }
-    int a = 0;
+    
+    // XÓA: int a = 0; (Biến debug không cần thiết)
+    
     @Override
     public void run() {
 
@@ -48,8 +51,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         while(isRunning){
 
             gameState.Update();
-            gameState.Render();
-
+            // Tối ưu hóa: Gọi Render() chỉ khi cần thiết, nhưng giữ lại ở đây để đảm bảo vẽ liên tục
+            gameState.Render(); 
 
             repaint();
 
@@ -59,7 +62,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
                     if(sleepTime > 0)
                             Thread.sleep(sleepTime/1000000);
-                    else Thread.sleep(period/2000000);
+                    // Giữ lại logic này để tránh treo CPU khi game chạy quá nhanh
+                    else Thread.sleep(period/2000000); 
 
             }catch(Exception e){}
 

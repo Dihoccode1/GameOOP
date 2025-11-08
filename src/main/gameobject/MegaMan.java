@@ -3,7 +3,6 @@ package main.gameobject;
 import main.state.GameWorldState;
 import main.effect.Animation;
 import main.effect.CacheDataLoader;
-import java.applet.AudioClip;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -22,15 +21,10 @@ public class MegaMan extends Human {
     private long lastShootingTime;
     private boolean isShooting = false;
     
-    private AudioClip hurtingSound;
-    private AudioClip shooting1;
-    
+
     public MegaMan(float x, float y, GameWorldState gameWorld) {
         super(x, y, 70, 90, 0.1f, 100, gameWorld);
-        
-        shooting1 = CacheDataLoader.getInstance().getSound("bluefireshooting");
-        hurtingSound = CacheDataLoader.getInstance().getSound("megamanhurt");
-        
+         
         setTeamType(LEAGUE_TEAM);
 
         setTimeForNoBehurt(2000*1000000);
@@ -308,7 +302,7 @@ public class MegaMan extends Human {
     
         if(!isShooting && !getIsDicking()){
             
-            shooting1.play();
+          
             
             Bullet bullet = new BlueFire(getPosX(), getPosY(), getGameWorld());
             if(getDirection() == LEFT_DIR) {
@@ -341,7 +335,7 @@ public class MegaMan extends Human {
     @Override
     public void hurtingCallback(){
         System.out.println("Call back hurting");
-        hurtingSound.play();
+        
     }
 
 }

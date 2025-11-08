@@ -8,7 +8,7 @@ package main.gameobject;
 import main.state.GameWorldState;
 import main.effect.Animation;
 import main.effect.CacheDataLoader;
-import java.applet.AudioClip;
+// XÓA: import java.applet.AudioClip;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -22,7 +22,8 @@ public class RedEyeDevil extends ParticularObject {
     
     private long startTimeToShoot;
     
-    private AudioClip shooting;
+    // XÓA KHAI BÁO BIẾN ÂM THANH
+    // private AudioClip shooting; 
     
     public RedEyeDevil(float x, float y, GameWorldState gameWorld) {
         super(x, y, 127, 89, 0, 100, gameWorld);
@@ -32,13 +33,16 @@ public class RedEyeDevil extends ParticularObject {
         startTimeToShoot = 0;
         setDamage(10);
         setTimeForNoBehurt(300000000);
-        shooting = CacheDataLoader.getInstance().getSound("redeyeshooting");
+        // XÓA KHỞI TẠO ÂM THANH
+        // shooting = CacheDataLoader.getInstance().getSound("redeyeshooting"); 
     }
 
     @Override
     public void attack() {
     
-        shooting.play();
+        // XÓA PHÁT ÂM THANH
+        // shooting.play(); 
+        
         Bullet bullet = new RedEyeBullet(getPosX(), getPosY(), getGameWorld());
         if(getDirection() == LEFT_DIR) bullet.setSpeedX(-8);
         else bullet.setSpeedX(8);
@@ -50,6 +54,14 @@ public class RedEyeDevil extends ParticularObject {
     
     public void Update(){
         super.Update();
+        
+        // Tối ưu hóa: Cập nhật Animation trong Update() thay vì Draw()
+        if(getDirection() == LEFT_DIR){
+            backAnim.Update(System.nanoTime());
+        }else{
+            forwardAnim.Update(System.nanoTime());
+        }
+        
         if(System.nanoTime() - startTimeToShoot > 1000*10000000){
             attack();
             System.out.println("Red Eye attack");
@@ -73,11 +85,11 @@ public class RedEyeDevil extends ParticularObject {
                 // plash...
             }else{
                 if(getDirection() == LEFT_DIR){
-                    backAnim.Update(System.nanoTime());
+                    // XÓA: backAnim.Update(System.nanoTime());
                     backAnim.draw((int) (getPosX() - getGameWorld().camera.getPosX()), 
                             (int)(getPosY() - getGameWorld().camera.getPosY()), g2);
                 }else{
-                    forwardAnim.Update(System.nanoTime());
+                    // XÓA: forwardAnim.Update(System.nanoTime());
                     forwardAnim.draw((int) (getPosX() - getGameWorld().camera.getPosX()), 
                             (int)(getPosY() - getGameWorld().camera.getPosY()), g2);
                 }

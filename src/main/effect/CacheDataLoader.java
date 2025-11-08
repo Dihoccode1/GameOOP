@@ -1,14 +1,11 @@
 package main.effect;
 
 import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Hashtable;
 import javax.imageio.ImageIO;
 
@@ -30,11 +27,11 @@ public class CacheDataLoader {
     private String animationfile = "data/animation.txt";
     private String physmapfile = "data/phys_map.txt";
     private String backgroundmapfile = "data/background_map.txt";
-    private String soundfile = "data/sounds.txt";
+   
     
     private Hashtable<String, FrameImage> frameImages; 
     private Hashtable<String, Animation> animations;
-    private Hashtable<String, AudioClip> sounds;
+   
     
     private int[][] phys_map;
     private int[][] background_map;
@@ -47,9 +44,7 @@ public class CacheDataLoader {
         return instance;
     }
     
-    public AudioClip getSound(String name){
-        return instance.sounds.get(name);
-    }
+   
     
     public Animation getAnimation(String name){
         
@@ -79,54 +74,11 @@ public class CacheDataLoader {
         LoadAnimation();
         LoadPhysMap();
         LoadBackgroundMap();
-        LoadSounds();
+      
         
     }
     
-    public void LoadSounds() throws IOException{
-        sounds = new Hashtable<String, AudioClip>();
-        
-        FileReader fr = new FileReader(soundfile);
-        BufferedReader br = new BufferedReader(fr);
-        
-        String line = null;
-        
-        if(br.readLine()==null) { // no line = "" or something like that
-            System.out.println("No data");
-            throw new IOException();
-        }
-        else {
-            
-            fr = new FileReader(soundfile);
-            br = new BufferedReader(fr);
-            
-            while((line = br.readLine()).equals(""));
-            
-            int n = Integer.parseInt(line);
-            
-            for(int i = 0;i < n; i ++){
-                
-                AudioClip audioClip = null;
-                while((line = br.readLine()).equals(""));
-
-                String[] str = line.split(" ");
-                String name = str[0];
-                
-                String path = str[1];
-
-                try {
-                   audioClip =  Applet.newAudioClip(new URL("file","",str[1]));
-
-                } catch (MalformedURLException ex) {}
-                
-                instance.sounds.put(name, audioClip);
-            }
-            
-        }
-        
-        br.close();
-        
-    }
+  
     
     public void LoadBackgroundMap() throws IOException{
         
